@@ -1,8 +1,8 @@
-import { Section } from "@/types/course";
+import { Section, PointerItem } from "@/types/course";
 import { FaCheck } from "react-icons/fa";
 
 interface Props {
-  section: Section;
+  section: Section<PointerItem>;
 }
 
 const WhatYouWillLearn = ({ section }: Props) => {
@@ -12,7 +12,7 @@ const WhatYouWillLearn = ({ section }: Props) => {
 
       <div className="bg-white p-8 border border-gray-200 rounded-md">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-          {section.values?.map((item: any, index: number) => (
+          {section.values?.map((item: PointerItem, index: number) => (
             <div key={index} className="flex items-start">
               <FaCheck className="text-blue-500 mt-1 mr-3 flex-shrink-0" />
               <p className="text-gray-700">{item.text}</p>

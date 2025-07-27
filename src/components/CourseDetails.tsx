@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Section } from "@/types/course";
+import { Section, AboutItem } from "@/types/course";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 interface Props {
-  section: Section;
+  section: Section<AboutItem>;
 }
 
 const CourseDetails = ({ section }: Props) => {
@@ -16,11 +16,11 @@ const CourseDetails = ({ section }: Props) => {
   };
 
   return (
-    <div className="">
+    <div className=" ">
       <h2 className="text-2xl font-bold mb-4">{section.name}</h2>
 
       <div className="bg-white border border-gray-200 rounded-sm ">
-        {section.values.map((detail: any, index: number) => (
+        {section.values.map((detail: AboutItem, index: number) => (
           <div key={index} className="px-6 py-3">
             {index > 0 && (
               <div className="border-t border-dotted border-gray-300 my-3"></div>

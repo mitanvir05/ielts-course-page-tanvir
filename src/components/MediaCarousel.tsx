@@ -8,36 +8,37 @@ import Image from 'next/image';
 import YouTube from 'react-youtube';
 import { FaPlay } from 'react-icons/fa';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { MediaItem } from '@/types/course';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
+interface Props {
+  media: MediaItem[];
+}
 
-
-const MediaCarousel = ({ media }: any) => { 
+const MediaCarousel = ({ media }: Props) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const [inlinePlayerId, setInlinePlayerId] = useState<string | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handlePlayClick = (e: React.MouseEvent, videoId: string) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     setInlinePlayerId(videoId);
   };
-  
-  const getThumbnailSrc = (item: any) => {
+
+  const getThumbnailSrc = (item: MediaItem) => {
     if (item.thumbnail_url) {
       return item.thumbnail_url;
     }
-    if (item.resource_type === 'video') {
-      
-      return `https://www.youtube.com/watch?v=dQw4w9WgXcQ2{item.resource_value}/hqdefault.jpg`;
+    if (item.resource_type === 'video' && item.resource_value) {
+      return `https://i.ytimg.com/vi/${item.resource_value}/hqdefault.jpg`;
     }
     return item.resource_value;
   };
 
   return (
-    
     <div>
       <Swiper
         modules={[Navigation, Thumbs]}
@@ -53,12 +54,12 @@ const MediaCarousel = ({ media }: any) => {
           setActiveIndex(swiper.realIndex);
         }}
       >
-        {media.map((item: any, index: number) => (
+        {media.map((item, index) => (
           <SwiperSlide key={index}>
             <div className="relative w-full aspect-video">
               {inlinePlayerId === item.resource_value ? (
                 <YouTube
-                  videoId={inlinePlayerId}
+                  videoId={inlinePlayerId || ''}
                   opts={{ width: '100%', height: '100%', playerVars: { autoplay: 1 } }}
                   className="w-full h-full"
                 />
@@ -70,7 +71,7 @@ const MediaCarousel = ({ media }: any) => {
                     fill
                     priority={index === 0}
                     style={{ objectFit: 'cover' }}
-                    onError={(e) => e.currentTarget.style.display = 'none'} // Hide image on error
+                    onError={(e) => e.currentTarget.style.display = 'none'}
                   />
                   {item.resource_type === 'video' && (
                     <div
@@ -99,7 +100,7 @@ const MediaCarousel = ({ media }: any) => {
         modules={[Thumbs]}
         className="mt-2"
       >
-        {media.map((item: any, index: number) => (
+        {media.map((item, index) => (
           <SwiperSlide key={index} className="cursor-pointer">
              <div className={`relative w-full aspect-video rounded-md overflow-hidden p-0.5 ${activeIndex === index ? 'border-2 border-green-500' : 'border-2 border-transparent'}`}>
                 <Image

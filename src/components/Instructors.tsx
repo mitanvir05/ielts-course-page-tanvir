@@ -1,10 +1,10 @@
-import { Section } from "@/types/course";
+import { Section, InstructorItem } from "@/types/course"; //
 import Image from "next/image";
 import Link from "next/link";
 import { FaChevronRight } from "react-icons/fa";
 
 interface Props {
-  section: Section;
+  section: Section<InstructorItem>;
 }
 
 const Instructors = ({ section }: Props) => {
@@ -12,7 +12,7 @@ const Instructors = ({ section }: Props) => {
     <div>
       <h2 className="text-2xl font-bold mb-4">{section.name}</h2>
       <div className="space-y-4">
-        {section.values?.map((instructor: any, index: number) => (
+        {section.values?.map((instructor: InstructorItem, index: number) => (
           <div
             key={index}
             className="p-6 bg-white border border-gray-200 rounded-sm "
@@ -37,9 +37,7 @@ const Instructors = ({ section }: Props) => {
                     </a>
                   </Link>
                 ) : (
-                  <h3 className="text-xltext-gray-800">
-                    {instructor.name}
-                  </h3>
+                  <h3 className="text-xl text-gray-800">{instructor.name}</h3>
                 )}
 
                 <div

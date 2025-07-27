@@ -1,6 +1,14 @@
 // src/app/page.tsx
 import { Metadata } from "next";
-import { CourseData } from "@/types/course";
+import {
+  CourseData,
+  Section,
+  InstructorItem,
+  FeatureItem,
+  PointerItem,
+  FeatureExplanationItem,
+  AboutItem,
+} from "@/types/course";
 import Title from "@/components/Title";
 import Description from "@/components/Description";
 import Instructors from "@/components/Instructors";
@@ -12,7 +20,6 @@ import CtaSidebar from "@/components/CtaSidebar";
 import Checklist from "@/components/Checklist";
 import CourseExclusiveFeatures from "@/components/CourseExclusiveFeatures";
 
-// Data fetching function, now defaults to 'en'
 async function getCourseData(
   lang: "en" | "bn" = "en"
 ): Promise<CourseData | null> {
@@ -82,19 +89,37 @@ export default async function Home() {
         <div className="lg:col-span-2 space-y-8">
           <Title title={courseData?.title ?? "Course Title"} />
           <Description htmlContent={courseData?.description ?? ""} />
-          {instructorSection && <Instructors section={instructorSection} />}
-          {featuresSection && <CourseFeatures section={featuresSection} />}
-          {pointersSection && <WhatYouWillLearn section={pointersSection} />}
-          {exclusiveFeaturesSection && (
-            <CourseExclusiveFeatures section={exclusiveFeaturesSection} />
+
+          {instructorSection && (
+            <Instructors
+              section={instructorSection as Section<InstructorItem>}
+            />
           )}
-          {aboutSection && <CourseDetails section={aboutSection} />}
+          {featuresSection && (
+            <CourseFeatures section={featuresSection as Section<FeatureItem>} />
+          )}
+          {pointersSection && (
+            <WhatYouWillLearn
+              section={pointersSection as Section<PointerItem>}
+            />
+          )}
+          {exclusiveFeaturesSection && (
+            <CourseExclusiveFeatures
+              section={
+                exclusiveFeaturesSection as Section<FeatureExplanationItem>
+              }
+            />
+          )}
+          {aboutSection && (
+            <CourseDetails section={aboutSection as Section<AboutItem>} />
+          )}
         </div>
 
         <div className="lg:col-span-1 space-y-4">
           <MediaCarousel media={courseData?.media ?? []} />
-          <div className="bg-white border border-gray-200 rounded-md  p-6">
+          <div className="bg-white border border-gray-200 rounded-md p-6">
             <CtaSidebar ctaText={courseData?.cta_text?.name ?? "Enroll Now"} />
+            <hr className="my-6" />
             <Checklist items={courseData?.checklist ?? []} />
           </div>
         </div>
