@@ -12,9 +12,10 @@ const navLinks = [
 
 const Header = () => {
   return (
-    <header className="shadow-md sticky top-0 z-50">
+    <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
+          
           {/* Left Section: Logo and Search */}
           <div className="flex items-center space-x-6">
             <div className="flex-shrink-0">
@@ -31,9 +32,8 @@ const Header = () => {
               </div>
               <input
                 type="text"
-                placeholder="Search for skills courses, or school programs...
-"
-                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                placeholder="Search for skills courses, or school programs..."
+                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-4xl leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm"
               />
             </div>
           </div>
@@ -59,7 +59,7 @@ const Header = () => {
               <span>16910</span>
             </button>
             <button className="bg-green-500 text-white px-4 py-1.5 rounded-md text-sm font-semibold hover:bg-green-600">
-           Log in
+            Log in
             </button>
           </div>
         </div>

@@ -1,8 +1,8 @@
-'use client'; 
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 import { Section } from "@/types/course";
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 interface Props {
   section: Section;
@@ -16,22 +16,23 @@ const CourseDetails = ({ section }: Props) => {
   };
 
   return (
-    <div>
-      <h2 className="text-3xl font-bold mb-4">{section.name}</h2>
+    <div className="">
+      <h2 className="text-2xl font-bold mb-4">{section.name}</h2>
 
-      <div className="bg-white border border-gray-200 rounded-xl shadow-sm">
+      <div className="bg-white border border-gray-200 rounded-sm ">
         {section.values.map((detail: any, index: number) => (
-          <div key={index} className="px-6 py-4">
-            {/* **FIX:** Replaced <hr> with a styled <div> for the dotted line */}
-            {index > 0 && <div className="border-t border-dotted border-gray-300 my-4"></div>}
-            
+          <div key={index} className="px-6 py-3">
+            {index > 0 && (
+              <div className="border-t border-dotted border-gray-300 my-3"></div>
+            )}
+
             <button
               onClick={() => toggleAccordion(index)}
               className="w-full flex justify-between items-center text-left focus:outline-none"
             >
               <div
                 className="font-semibold text-lg"
-                dangerouslySetInnerHTML={{ __html: detail.title || '' }}
+                dangerouslySetInnerHTML={{ __html: detail.title || "" }}
               />
               {activeIndex === index ? (
                 <FaChevronUp className="text-gray-500" />
@@ -44,7 +45,7 @@ const CourseDetails = ({ section }: Props) => {
               <div className="mt-4">
                 <div
                   className="prose max-w-none prose-ul:list-none prose-ul:pl-0"
-                  dangerouslySetInnerHTML={{ __html: detail.description || '' }}
+                  dangerouslySetInnerHTML={{ __html: detail.description || "" }}
                 />
               </div>
             )}

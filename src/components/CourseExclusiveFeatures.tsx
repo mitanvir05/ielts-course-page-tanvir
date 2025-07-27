@@ -9,9 +9,9 @@ interface Props {
 const CourseExclusiveFeatures = ({ section }: Props) => {
   return (
     <div>
-      <h2 className="text-3xl font-bold mb-4">{section.name}</h2>
+      <h2 className="text-2xl font-bold mb-4">{section.name}</h2>
 
-      <div className="p-8 bg-white border border-gray-200 rounded-xl shadow-sm">
+      <div className="p-8 bg-white border border-gray-200 rounded-md">
         <div className="space-y-8">
           {section.values?.map((feature: any, index: number) => (
             <div key={index}>
